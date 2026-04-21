@@ -1,0 +1,48 @@
+define([], () => {
+  'use strict';
+
+  class PageModule {
+    addHyperlinkNextToSupplierHeading() {
+      const heading = document.querySelector(
+        'h1.oj-sp-header-general-overview-page-title'
+      );
+
+      if (!heading) {
+        console.warn('Suppliers heading not found. Retrying in 500ms...');
+        setTimeout(() => this.addHyperlinkNextToSupplierHeading(), 500);
+        return;
+      }
+
+      const parentEl = heading.parentElement;
+
+      if (parentEl.querySelector('.custom-supplier-heading-link')) {
+        return;
+      }
+
+      const link = document.createElement('a');
+      link.href = decodeURIComponent('https%3A%2F%2Fterfusionapp-icbkjb-dev1.fa.ocs.oraclecloud.com%2Fanalytics%2Fsaw.dll%3FbipublisherEntry%26Action%3Dopen%26itemType%3D.xdo%26bipPath%3D%252FCustom%252FVEERA_POC%252FExtension%252FPDF-RPT.xdo%26bipParams%3D%257b%2522_xmode%2522%3A%25224%2522%2C%2522_sTkn%2522%3A%25222bb5c1e619cb92fd447%2522%2C%2522_xiasynch%2522%3A%2522%2522%2C%2522_xpf%2522%3A%2522%2522%2C%2522_xpt%2522%3A%25220%2522%2C%2522_dFlag%2522%3A%2522false%2522%2C%2522_edIndex%2522%3A%25220%2522%2C%2522_dIndex%2522%3A%25220%2522%2C%2522_rToken%2522%3A%2522%2522%2C%2522_ranDiag%2522%3A%2522false%2522%2C%2522_xdo%2522%3A%2522%252FCustom%252FVEERA_POC%252FExtension%252FPDF-RPT.xdo%2522%2C%2522_paramsp_ordnum%2522%3A%2522%23%257Bbindings.OrderNumber.inputValue%257D%2522%2C%2522_xt%2522%3A%2522PDF%2522%2C%2522_xf%2522%3A%2522pdf%2522%2C%2522_xautorun%2522%3A%2522false%2522%257D%26_linkToReport%3Dtrue&data=05%7C02%7Cvveeraswamy%40deloitte.com%7C37ba2d7b614f45d45d2e08de9faaeb0f%7C36da45f1dd2c4d1faf135abe46b99921%7C0%7C0%7C639123753594466786%7CUnknown%7CTWFpbGZsb3d8eyJFbXB0eU1hcGkiOnRydWUsIlYiOiIwLjAuMDAwMCIsIlAiOiJXaW4zMiIsIkFOIjoiTWFpbCIsIldUIjoyfQ%3D%3D%7C0%7C%7C%7C&sdata=o4If2h42I0v2xkmtGPDT6OyeKgejCcTIyLKVGZkj71I%3D&reserved=0');
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'clickme';
+      link.className = 'custom-supplier-heading-link';
+
+      link.style.fontSize = '14px';
+      link.style.color = '#0572ce';
+      link.style.textDecoration = 'none';
+      link.style.marginLeft = '12px';
+      link.style.verticalAlign = 'middle';
+      link.style.cursor = 'pointer';
+
+      link.addEventListener('mouseenter', () => {
+        link.style.textDecoration = 'underline';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.textDecoration = 'none';
+      });
+
+      heading.insertAdjacentElement('afterend', link);
+    }
+  }
+
+  return PageModule;
+});
