@@ -1,0 +1,50 @@
+// AI Generated Code by Deloitte + Cursor (BEGIN)
+define([], () => {
+  'use strict';
+
+  class PageModule {
+    addHyperlinkNextToSupplierHeading() {
+      const heading = document.querySelector(
+        'h1.oj-sp-header-general-overview-page-title'
+      );
+
+      if (!heading) {
+        console.warn('Suppliers heading not found. Retrying in 500ms...');
+        setTimeout(() => this.addHyperlinkNextToSupplierHeading(), 500);
+        return;
+      }
+
+      const parentEl = heading.parentElement;
+
+      if (parentEl.querySelector('.custom-supplier-heading-link')) {
+        return;
+      }
+
+      const link = document.createElement('a');
+      link.href = 'https://www.google.com';
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = 'Go to Google';
+      link.className = 'custom-supplier-heading-link';
+
+      link.style.fontSize = '14px';
+      link.style.color = '#0572ce';
+      link.style.textDecoration = 'none';
+      link.style.marginLeft = '12px';
+      link.style.verticalAlign = 'middle';
+      link.style.cursor = 'pointer';
+
+      link.addEventListener('mouseenter', () => {
+        link.style.textDecoration = 'underline';
+      });
+      link.addEventListener('mouseleave', () => {
+        link.style.textDecoration = 'none';
+      });
+
+      heading.insertAdjacentElement('afterend', link);
+    }
+  }
+
+  return PageModule;
+});
+// AI Generated Code by Deloitte + Cursor (END)
